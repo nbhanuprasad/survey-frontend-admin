@@ -1,55 +1,29 @@
 <template>
-    <v-app>
-      <v-app-bar  >
-            <v-img
-                class="mx-2"
-                :src="logo"
-                max-height="40"
-                max-width="40"
-                contain
-            ></v-img>
-            <v-app-bar-title  >Tutorial</v-app-bar-title>
-            <v-spacer></v-spacer>
-            <v-toolbar-items>
-                <v-btn 
-                    variant="text"
-                    @click="goList"
-                    >
-                  List
-                </v-btn>
-                <v-btn 
-                    variant="text"
-                    @click="goAdd"
-                    >
-                  Add
-                </v-btn>
-            </v-toolbar-items>
-      </v-app-bar>
-      <v-main >
-        <v-container>
-          <router-view />
-        </v-container>
-      </v-main>  
-    </v-app>
+  <v-app>
+    <v-main>
+      <Navbar v-if="currentPath !== '/login'" />
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
-
 <script>
-import logo from './assets/oc-logo-white.png'
+import Navbar from "./components/Navbar/Navbar.vue";
+import "./App.css";
 export default {
-  name: 'App',
-
-  data: () => ({
-    logo,
-  }),
-  methods: {
-    goAdd() {
-      this.$router.push({ name: 'add' });
-    },
-    goList() {
-      this.$router.push({ name: 'tutorials' });
-    }
+  name: "App",
+  components: {
+    Navbar,
   },
-
-}
+  data: () => ({
+    currentPath: "",
+  }),
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.currentPath = this.$route.path;
+      }
+    );
+  },
+};
 </script>
-
