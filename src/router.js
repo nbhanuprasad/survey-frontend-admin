@@ -34,7 +34,13 @@ const routes =  [
     name: "editLesson",
     component: () => import("./views/EditLesson.vue"),
     props: true
-  }
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("./views/Auth/Login.vue"),
+    props: true
+  },
 ];
 const router = createRouter({
   base: process.env.NODE_ENV === 'development' ? '/' : '/tutorial-frontend-1/',
