@@ -2,44 +2,19 @@ import { createWebHistory, createRouter } from "vue-router";
 const routes =  [
   {
     path: "/",
-    alias: "/tutorials",
-    name: "tutorials",
-    component: () => import("./views/TutorialsList.vue")
-  },
-  {
-    path: "/edit/:id",
-    name: "edit",
-    component: () => import("./views/EditTutorial.vue"),
-    props: true
-  },
-  {
-    path: "/add",
-    name: "add",
-    component: () => import("./views/AddTutorial.vue")
-  },
-  {
-    path: "/view",
-    name: "view",
-    component: () => import("./views/ViewTutorial.vue"),
-    props: true
-  },
-  {
-    path: "/addLesson",
-    name: "addLesson",
-    component: () => import("./views/AddLesson.vue"),
-    props: true
-  },
-  {
-    path: "/editLesson",
-    name: "editLesson",
-    component: () => import("./views/EditLesson.vue"),
-    props: true
+    alias: "/surveys",
+    name: "surveys",
+    component: () => import("./views/Survey/SurveysList.vue")
   },
   {
     path: "/login",
     name: "login",
     component: () => import("./views/Auth/Login.vue"),
-    props: true
+  },
+  {
+    path: "/create-admin",
+    name: "createAdmin",
+    component: () => import("./views/Admin/CreateAdmin.vue"),
   },
 ];
 const router = createRouter({

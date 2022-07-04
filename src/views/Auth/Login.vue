@@ -8,7 +8,7 @@
     </div>
     <div class="login__right">
       <v-form class="form">
-        <h2>LOGIN</h2>
+        <h2 class="heading">SUPER ADMIN LOGIN</h2>
         <v-text-field
           v-model="formData.email"
           label="Email"
