@@ -8,8 +8,11 @@
       <router-link class="navbar__right--link" to="/create-admin"
         >CREATE ADMIN</router-link
       >
-      <router-link class="navbar__right--link" to="/surveys"
+      <router-link class="navbar__right--link" to="/surveysList"
         >SURVEYS</router-link
+      >
+      <router-link class="navbar__right--link" to="/create-survey"
+        >Create Survey</router-link
       >
       <button class="button__black logout__button">Sign Out</button>
     </div>
