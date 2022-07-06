@@ -7,8 +7,13 @@ const routes =  [
   },
   {
     path: "/surveys",
-    name: "surveys",
+    name: "surveysList",
     component: () => import("./views/Survey/SurveysList.vue")
+  },
+  {
+    path: "/create-survey",
+    name: "createSurvey",
+    component: () => import("./views/Survey/CreateSurvey.vue"),
   },
   {
     path: "/login",
