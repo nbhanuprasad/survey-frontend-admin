@@ -3,12 +3,12 @@
     <div class="login__left">
       <div class="login__left--topHeadings">
         <h1>SURVEY</h1>
-        <h5>Manage surveys & admins</h5>
+        <h5>Manage surveys</h5>
       </div>
     </div>
     <div class="login__right">
       <v-form class="form">
-        <h2 class="heading">SUPER ADMIN LOGIN</h2>
+        <h2 class="heading">LOGIN</h2>
         <v-text-field
           v-model="formData.email"
           label="Email"
