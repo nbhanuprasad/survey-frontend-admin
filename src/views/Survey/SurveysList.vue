@@ -53,23 +53,7 @@ export default {
         {
           name: "Jelly bean",
           calories: 375,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-        },
+        }
       ],
       message: "Surveys List",
     };
