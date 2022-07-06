@@ -14,7 +14,7 @@
       <router-link class="navbar__right--link" to="/create-survey"
         >Create Survey</router-link
       >
-      <button class="button__black logout__button">LOGOUT</button>
+      <button class="button__black logout__button">Logout</button>
     </div>
   </div>
 </template>

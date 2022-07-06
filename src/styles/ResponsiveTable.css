@@ -7,8 +7,13 @@ table {
     background-color: #f8f8f8;
 }
 
+/* general styling */
+body {
+    line-height: 1.25;
+}
+
 table caption {
-    font-size: 1.5em;
+    font-size: 16px;
     margin: .5em 0 .75em;
 }
 
@@ -19,14 +24,26 @@ table tr {
 
 table th,
 table td {
-    padding: 15px;
+    padding: 18px;
     text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 table th {
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: .1em;
     text-transform: uppercase;
+    font-family: "Federo", sans-serif;
+}
+
+.table__item--actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.actions__icon {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {
@@ -76,9 +93,4 @@ table th {
     table td:last-child {
         border-bottom: 0;
     }
-}
-
-/* general styling */
-body {
-    line-height: 1.25;
 }

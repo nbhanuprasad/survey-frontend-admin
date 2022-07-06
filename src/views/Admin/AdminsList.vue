@@ -17,7 +17,16 @@
         <tr>
           <td data-label="Account">{{ admin.username }}</td>
           <td data-label="Due Date">{{ admin.email }}</td>
-          <td data-label="Amount">{{ admin.organization }}</td>
+          <td data-label="Actions">
+            <span class="table__item--actions">
+              <v-icon large color="blue" class="actions__icon">
+                mdi-eye-outline
+              </v-icon>
+              <v-icon large color="red" class="actions__icon">
+                mdi-delete-outline
+              </v-icon>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>

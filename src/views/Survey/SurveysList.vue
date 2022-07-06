@@ -11,7 +11,7 @@
           <th scope="col">Account</th>
           <th scope="col">Due Date</th>
           <th scope="col">Amount</th>
-          <th scope="col">Period</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody v-for="item in items">
@@ -19,7 +19,16 @@
           <td data-label="Account">{{ item.name }}</td>
           <td data-label="Due Date">{{ item.calories }}</td>
           <td data-label="Amount">{{ item.name }}</td>
-          <td data-label="Period">{{ item.calories }}</td>
+          <td data-label="Actions">
+            <span class="table__item--actions">
+              <v-icon large color="blue" class="actions__icon">
+                mdi-eye-outline
+              </v-icon>
+              <v-icon large color="red" class="actions__icon">
+                mdi-delete-outline
+              </v-icon>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -53,7 +62,7 @@ export default {
         {
           name: "Jelly bean",
           calories: 375,
-        }
+        },
       ],
       message: "Surveys List",
     };
