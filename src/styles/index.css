@@ -3,7 +3,7 @@
 :root {
     --black: #161515;
     --white: #ffff;
-    --lightGreen: #32de84;
+    --lightGreen: linear-gradient(120deg, #afc777 0%, #96e6a1 100%);;
     --blue: blue;
 }
 
@@ -86,7 +86,6 @@ body {
 }
 
 .login__left {
-    background: var(--lightGreen);
     display: flex;
     align-items: center;
 }
