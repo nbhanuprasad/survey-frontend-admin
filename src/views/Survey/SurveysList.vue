@@ -8,17 +8,17 @@
       </caption>
       <thead>
         <tr>
-          <th scope="col">Account</th>
+          <th scope="col">SurveyList</th>
           <th scope="col">Due Date</th>
-          <th scope="col">Amount</th>
+          <th scope="col">SurveyOwner</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody v-for="item in items">
+      <tbody v-for="item in items"  :key="item.id">
         <tr>
-          <td data-label="Account">{{ item.name }}</td>
+          <td data-label="SurveyList">{{ item.name }}</td>
           <td data-label="Due Date">{{ item.calories }}</td>
-          <td data-label="Amount">{{ item.name }}</td>
+          <td data-label="SurveyOwner">{{ item.name }}</td>
           <td data-label="Actions">
             <span class="table__item--actions">
               <v-icon large color="blue" class="actions__icon">
@@ -40,28 +40,8 @@ export default {
     return {
       items: [
         {
-          name: "Frozen Yogurt",
-          calories: 159,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
+          name: " null ",
+          calories: null,
         },
       ],
       message: "Surveys List",
