@@ -1,6 +1,6 @@
 <template>
   <div class="register container">
-    <v-form class="form register__form">
+    <v-form class="form register__form" @submit="createAdmin">
       <h2 class="heading">CREATE ADMIN</h2>
       <h3>{{ message }}</h3>
       <v-text-field
@@ -29,7 +29,7 @@
         :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showConfirmPassword ? 'text' : 'password'"
       ></v-text-field>
-      <button @click="createAdmin" class="button__black">Create Admin</button>
+      <button class="button__black">Create Admin</button>
     </v-form>
   </div>
 </template>
@@ -64,6 +64,10 @@ export default {
         username: this.formData.username,
         password: this.formData.password,
       };
+      if (this.formData.password !== this.formData.confirmPassword) {
+        this.message = "Password not match !";
+        return;
+      }
       AdminService.createAdmin(data)
         .then((response) => {
           if (response.status === 200) {
