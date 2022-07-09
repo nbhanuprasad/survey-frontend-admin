@@ -1,13 +1,17 @@
 import http from "../http-common";
 
 class AdminService {
-  createUser(userData) {
-    return http.post(`/auth/register`, userData);
+  createAdmin(adminData) {
+    return http.post(`/auth/signup`, adminData, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("token")
+      }
+    });
   }
   getAllAdmins() {
-    return http.get("/superadmin/alladmins",{
+    return http.get("/superadmin/alladmins", {
       headers: {
-        'x-access-token':  sessionStorage.getItem("token")
+        'x-access-token': sessionStorage.getItem("token")
       }
     });
   }

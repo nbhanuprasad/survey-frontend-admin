@@ -13,23 +13,19 @@
         :rules="[rules.required, rules.counter]"
       ></v-text-field>
       <v-text-field
-        v-model="formData.organisation"
-        label="Organisation"
-        :rules="[rules.required]"
-      ></v-text-field>
-      <v-text-field
         v-model="formData.password"
         label="Password"
         type="password"
         :rules="[rules.required]"
       ></v-text-field>
-      <button @click="handleregister" class="button__black">
+      <button @click="createAdmin" class="button__black">
         Create Admin
       </button>
     </v-form>
   </div>
 </template>
 <script>
+import AdminService from "../../services/AdminService";
 export default {
   data() {
     return {
@@ -38,7 +34,6 @@ export default {
         email: "",
         password: "",
         username: "",
-        organisation: "",
       },
       rules: {
         required: (value) => !!value || `Field Required !`,
@@ -50,5 +45,23 @@ export default {
       },
     };
   },
+  methods:{
+    createAdmin(){
+      const data = {
+        email: this.formData.email,
+        username: this.formData.username,
+        password: this.formData.password,
+      };
+      AdminService.createAdmin(data)
+        .then((response) => {
+          if (response.status === 200) {
+            this.$router.push({ name: "adminsList" });
+          }
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    }
+  }
 };
 </script>
