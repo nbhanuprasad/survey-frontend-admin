@@ -2,6 +2,7 @@
   <div class="register container">
     <v-form class="form register__form">
       <h2 class="heading">CREATE ADMIN</h2>
+      <h3>{{ message }}</h3>
       <v-text-field
         v-model="formData.email"
         label="Email"
@@ -15,12 +16,20 @@
       <v-text-field
         v-model="formData.password"
         label="Password"
-        type="password"
         :rules="[rules.required]"
+        @click:append="showPassword = !showPassword"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPassword ? 'text' : 'password'"
       ></v-text-field>
-      <button @click="createAdmin" class="button__black">
-        Create Admin
-      </button>
+      <v-text-field
+        v-model="formData.confirmPassword"
+        label="Confirm Password"
+        :rules="[rules.required]"
+        @click:append="showConfirmPassword = !showConfirmPassword"
+        :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showConfirmPassword ? 'text' : 'password'"
+      ></v-text-field>
+      <button @click="createAdmin" class="button__black">Create Admin</button>
     </v-form>
   </div>
 </template>
@@ -32,9 +41,12 @@ export default {
       message: "",
       formData: {
         email: "",
-        password: "",
         username: "",
+        password: "",
+        confirmPassword: "",
       },
+      showPassword: false,
+      showConfirmPassword: false,
       rules: {
         required: (value) => !!value || `Field Required !`,
         email: (value) => {
@@ -45,8 +57,8 @@ export default {
       },
     };
   },
-  methods:{
-    createAdmin(){
+  methods: {
+    createAdmin() {
       const data = {
         email: this.formData.email,
         username: this.formData.username,
@@ -61,7 +73,7 @@ export default {
         .catch((e) => {
           this.message = e.response.data.message;
         });
-    }
-  }
+    },
+  },
 };
 </script>
