@@ -57,14 +57,15 @@ export default {
       };
       AuthService.login(loginData)
         .then((response) => {
-          if (
-            response.status === 200 &&
-            response.data.userType === "super-admin"
-          ) {
+          if (response.status === 200) {
             sessionStorage.setItem("authToken", response.data.accessToken);
             sessionStorage.setItem("userId", response.data.id);
             sessionStorage.setItem("userType", response.data.userType);
-            this.$router.push({ name: "adminsList" });
+            if (response.data.userType === "super-admin") {
+              this.$router.push({ name: "adminsList" });
+            } else if (response.data.userType === "admin") {
+              this.$router.push({ name: "surveysList" });
+            }
           }
         })
         .catch((e) => {
