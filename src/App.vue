@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <v-main>
-      <Navbar v-if="currentPath !== '/login'" />
+      <Navbar 
+      v-if="currentPath !== '/login'"
+      :role="userType"
+      />
       <router-view />
     </v-main>
   </v-app>
@@ -17,12 +20,23 @@ export default {
   },
   data: () => ({
     currentPath: "",
+    userType: "",
   }),
   created() {
+    const authToken = sessionStorage.getItem("authToken");
+    const userType = sessionStorage.getItem("userType");
+    if (authToken && userType === "super-admin") {
+      this.$router.push({ name: "adminsList" });
+    } else if (authToken && userType === "admin") {
+      this.$router.push({ name: "surveysList" });
+    } else {
+      this.$router.push({ name: "login" });
+    }
     this.$watch(
       () => this.$route.params,
       () => {
         this.currentPath = this.$route.path;
+        this.userType = sessionStorage.getItem("userType");
       }
     );
   },
