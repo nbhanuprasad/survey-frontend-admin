@@ -9,7 +9,7 @@
     <div class="login__right">
       <v-form class="form">
         <h2 class="heading">LOGIN</h2>
-        <h3>{{ message }}</h3>
+        <h3 class="error__msg">{{ message }}</h3>
         <v-text-field
           v-model="loginData.email"
           label="Email"

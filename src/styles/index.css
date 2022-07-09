@@ -5,6 +5,7 @@
     --white: #ffff;
     --lightGreen: linear-gradient(120deg, #afc777 0%, #96e6a1 100%);;
     --blue: blue;
+    --red:red;
 }
 
 body {
@@ -134,10 +135,13 @@ body {
     }
 
     .login__form {
-        width: 100%;
+        width: 90%;
     }
 
     .register__form {
-        width: 100%;
+        width: 90%;
+    }
+    .heading{
+        font-size: 30px;
     }
 }

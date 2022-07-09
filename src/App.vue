@@ -43,6 +43,8 @@ export default {
 };
 </script>
 <style>
+/* common */
+
 .container {
   padding: 40px 0px;
   background: var(--lightGreen);
@@ -68,5 +70,11 @@ export default {
 .logout__button {
   padding: 8px 10px;
   font-size: 16px;
+}
+.error__msg{
+  color: var(--red);
+  text-align: center;
+  padding: 5px 0;
+  margin: 10px 0;
 }
 </style>
