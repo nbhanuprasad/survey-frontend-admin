@@ -20,7 +20,9 @@
         <v-text-field
           v-model="loginData.password"
           label="Password"
-          type="password"
+          @click:append="showPassword = !showPassword"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="showPassword ? 'text' : 'password'"
           :rules="[rules.required]"
           outlined
         ></v-text-field>
@@ -39,6 +41,7 @@ export default {
         email: "",
         password: "",
       },
+      showPassword: false,
       rules: {
         required: (value) => !!value || `Field Required !`,
         email: (value) => {
