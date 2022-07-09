@@ -2,7 +2,7 @@ import http from "../http-common";
 
 class AuthService {
   login(authData) {
-    return http.post(`/auth/login`, authData);
+    return http.post(`/auth/signin`, authData);
   }
   logout(userId) {
     return http.get(`/auth/logout/${userId}`,{
