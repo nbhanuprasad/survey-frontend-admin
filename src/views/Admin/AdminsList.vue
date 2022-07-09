@@ -37,12 +37,7 @@ import AdminService from "../../services/AdminService";
 export default {
   data() {
     return {
-      admins: [
-        {
-          username: "Tester 1",
-          email: "test@test.com",
-        },
-      ],
+      admins: [],
       message: "Admins List",
     };
   },
