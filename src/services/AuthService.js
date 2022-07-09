@@ -7,7 +7,7 @@ class AuthService {
   logout(userId) {
     return http.get(`/auth/logout/${userId}`,{
       headers: {
-        'x-access-token': sessionStorage.getItem("token")
+        'x-access-token': sessionStorage.getItem("authToken")
       }
     });
   }
