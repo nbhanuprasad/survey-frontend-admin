@@ -4,14 +4,14 @@ class AdminService {
   createAdmin(adminData) {
     return http.post(`/auth/signup`, adminData, {
       headers: {
-        'x-access-token': sessionStorage.getItem("token")
+        'x-access-token': sessionStorage.getItem("authToken")
       }
     });
   }
   getAllAdmins() {
     return http.get("/superadmin/alladmins", {
       headers: {
-        'x-access-token': sessionStorage.getItem("token")
+        'x-access-token': sessionStorage.getItem("authToken")
       }
     });
   }
