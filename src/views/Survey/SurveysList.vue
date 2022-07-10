@@ -26,7 +26,12 @@
               <v-icon large color="blue" class="actions__icon">
                 mdi-eye-outline
               </v-icon>
-              <v-icon large color="red" class="actions__icon">
+              <v-icon
+                large
+                color="red"
+                class="actions__icon"
+                @click="onDeleteSurvey(survey.id)"
+              >
                 mdi-delete-outline
               </v-icon>
             </span>
@@ -52,6 +57,15 @@ export default {
     };
   },
   methods: {
+    onDeleteSurvey(id) {
+      SurveyService.deleteSurvey(id)
+        .then(() => {
+          this.fetchSurveys();
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
     fetchSurveys() {
       SurveyService.getAllSurveys()
         .then((response) => {
