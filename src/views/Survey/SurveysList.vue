@@ -8,17 +8,19 @@
       </caption>
       <thead>
         <tr>
-          <th scope="col">Account</th>
-          <th scope="col">Due Date</th>
-          <th scope="col">Amount</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody v-for="item in items">
+      <tbody v-for="survey in surveys">
         <tr>
-          <td data-label="Account">{{ item.name }}</td>
-          <td data-label="Due Date">{{ item.calories }}</td>
-          <td data-label="Amount">{{ item.name }}</td>
+          <td data-label="Survey Title">{{ survey.title }}</td>
+          <td data-label="Survey Description">{{ survey.description }}</td>
+          <td data-label="Status">
+            {{ survey.isPublished ? "Published" : "UnPublished" }}
+          </td>
           <td data-label="Actions">
             <span class="table__item--actions">
               <v-icon large color="blue" class="actions__icon">
@@ -35,37 +37,33 @@
   </div>
 </template>
 <script>
+import SurveyService from "../../services/SurveyService";
 export default {
   data() {
     return {
-      items: [
+      surveys: [
         {
-          name: "Frozen Yogurt",
-          calories: 159,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
+          title: "space",
+          description: "study on space",
+          isPublished: false,
         },
       ],
       message: "Surveys List",
     };
+  },
+  methods: {
+    fetchSurveys() {
+      SurveyService.getAllSurveys()
+        .then((response) => {
+          this.surveys = response.data;
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+  },
+  mounted() {
+    this.fetchSurveys();
   },
 };
 </script>
