@@ -15,8 +15,8 @@
       </thead>
       <tbody v-for="admin in admins">
         <tr>
-          <td data-label="Account">{{ admin.username }}</td>
-          <td data-label="Due Date">{{ admin.email }}</td>
+          <td data-label="User Name">{{ admin.username }}</td>
+          <td data-label="Email">{{ admin.email }}</td>
           <td data-label="Actions">
             <span class="table__item--actions">
               <v-icon large color="blue" class="actions__icon">

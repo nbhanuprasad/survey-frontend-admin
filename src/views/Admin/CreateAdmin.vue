@@ -2,7 +2,7 @@
   <div class="register container">
     <v-form class="form register__form" @submit="createAdmin">
       <h2 class="heading">CREATE ADMIN</h2>
-      <h3>{{ message }}</h3>
+      <h3 class="error__msg">{{ message }}</h3>
       <v-text-field
         v-model="formData.email"
         label="Email"
