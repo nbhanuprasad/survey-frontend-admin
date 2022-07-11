@@ -27,7 +27,7 @@ const routes =  [
   },
 ];
 const router = createRouter({
-  base: process.env.NODE_ENV === 'development' ? '/' : '/tutorial-frontend-1/',
+  base: process.env.NODE_ENV === 'development' ? '/' : '/survey-frontend-admin/',
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
