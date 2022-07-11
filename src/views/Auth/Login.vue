@@ -57,6 +57,7 @@ export default {
       const loginData = {
         email: this.loginData.email,
         password: this.loginData.password,
+        deviceId: Math.floor(Math.random() * 500000),
       };
       AuthService.login(loginData)
         .then((response) => {

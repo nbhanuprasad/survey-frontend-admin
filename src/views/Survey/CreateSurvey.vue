@@ -12,9 +12,13 @@
         label="Survey Description"
         :rules="[rules.required]"
       ></v-text-field>
-      <button @click="createSurvey" class="button__black">
-        Create Survey
-      </button>
+      <v-switch
+        :label="`${survey.isPublished ? 'UnPublish Survey' : 'Publish Survey'}`"
+        v-model="survey.isPublished"
+        inset
+        color="indigo darken-3"
+      ></v-switch>
+      <button @click="createSurvey" class="button__black">Create Survey</button>
     </v-form>
   </div>
 </template>
@@ -35,13 +39,14 @@ export default {
       },
     };
   },
-    methods: {
+  methods: {
     createSurvey() {
       const surveyData = {
         title: this.survey.title,
         description: this.survey.description,
         isPublished: this.survey.isPublished,
-      }
+        questions: [],
+      };
       SurveyService.createSurvey(surveyData)
         .then((response) => {
           if (response.status === 200) {
@@ -51,7 +56,7 @@ export default {
         .catch((e) => {
           this.message = e.response.data.message;
         });
-    }
+    },
   },
 };
 </script>
