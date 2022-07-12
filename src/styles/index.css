@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Italiana&family=Federo&family=Raleway:wght@400;500;700;800;900&display=swap");
+
+:root {
+    --black: #161515;
+    --white: #ffff;
+    --lightGreen: linear-gradient(120deg, #afc777 0%, #96e6a1 100%);;
+    --blue: blue;
+    --red:red;
+}
+
+body {
+    font-family: "Federo", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* navbar */
+.navbar {
+    height: 65px;
+    background: var(--white);
+    color: var(--black);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--fadedGrey);
+    box-shadow: 0px 10px 20px #504e4e2d;
+}
+
+.navbar__logo {
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.navbar__right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__right--link {
+    margin: 0 25px;
+    color: var(--black);
+    text-decoration: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.navbar__right--link:hover {
+    color: var(--blue);
+}
+
+/* FORM */
+.form {
+    width: 100%;
+    color: var(--black);
+    background: var(--white);
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px #504e4e6c;
+}
+
+.heading{
+    margin-bottom: 10px;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+/* LOGIN */
+.login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    background: var(--lightGreen);
+    font-family: "Federo", sans-serif;
+    color: var(--black);
+}
+
+.login__left {
+    display: flex;
+    align-items: center;
+}
+
+.login__left--topHeadings {
+    padding-left: 10%;
+}
+
+.login__left--topHeadings h1 {
+    font-family: "Italiana", serif;
+    font-size: 70px;
+}
+
+.login__left--topHeadings h5 {
+    font-size: 35px;
+}
+
+.login__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 60px;
+}
+
+/* REGISTER ADMIN */
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Federo", sans-serif;
+    color: var(--black);
+    min-height: 100%;
+}
+
+.register__form {
+    width: 45%;
+}
+
+@media (max-width: 900px) {
+    .login {
+        grid-template-columns: 1fr;
+    }
+
+    .login__left {
+        display: none;
+    }
+
+    .login__form {
+        width: 90%;
+    }
+
+    .register__form {
+        width: 90%;
+    }
+    .heading{
+        font-size: 30px;
+    }
+}
