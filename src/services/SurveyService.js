@@ -9,7 +9,7 @@ class SurveyService {
     });
   }
   createSurvey(surveyData) {
-    return http.post("/survey/create/", surveyData, {
+    return http.post("/createsurvey", surveyData, {
       headers: {
         'x-access-token': sessionStorage.getItem("authToken")
       }
