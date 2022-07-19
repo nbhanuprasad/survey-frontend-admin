@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Italiana&family=Federo&family=Raleway:wght@400;500;700;800;900&display=swap");
-
+@import url('../views/Survey/CreateSurvey.css');
 :root {
     --black: #161515;
     --white: #ffff;
@@ -32,6 +32,7 @@ body {
     justify-content: space-between;
     border-bottom: 1px solid var(--fadedGrey);
     box-shadow: 0px 10px 20px #504e4e2d;
+    z-index: 1;
 }
 
 .navbar__logo {
