@@ -53,11 +53,48 @@
               :rules="[rules.required]"
             >
             </v-text-field>
+            <!-- MULTIPLE CHOICE QUESTION-->
+            <div v-if="question.question_type === 'multiple-choice'">
+              <h5>
+                ADD OPTION (max 4*)
+                <v-icon
+                  large
+                  color="blue"
+                  @click="handleAddOption(index)"
+                  class="icon survey__icon"
+                  >mdi-plus</v-icon
+                >
+              </h5>
+              <div
+                class="survey__question--options"
+                v-for="(item, optionIndex) in question.options"
+                :key="optionIndex"
+              >
+                <div class="survey__question--option">
+                  <v-text-field
+                    v-model="item.option"
+                    :label="`Option ${optionIndex + 1}`"
+                    :rules="[rules.required]"
+                  >
+                  </v-text-field>
+                  <v-icon
+                    large
+                    color="red"
+                    @click="handleDeleteOption(index, optionIndex)"
+                    v-show="optionIndex !== 0"
+                    class="icon survey__icon del__icon"
+                  >
+                    mdi-minus</v-icon
+                  >
+                </div>
+              </div>
+            </div>
             <div class="survey__question--bottom">
               <v-switch
                 label="Required"
                 v-model="question.required"
-                color="success"
+                color="indigo"
+                inset
                 class="required__switch"
               >
               </v-switch>
@@ -90,7 +127,7 @@ export default {
         questions: [],
         isPublished: false,
         questionType: "",
-        questionOptions: ["text-box"],
+        questionOptions: ["text-box", "multiple-choice", "rating", "paragraph"],
       },
       message: "Create Survey , Add Questions",
       rules: {
@@ -105,11 +142,51 @@ export default {
         case "text-box":
           questions = [...questions, new FormTextBoxObj("text-box")];
           break;
+        case "paragraph":
+          questions = [...questions, new FormTextBoxObj("paragraph")];
+          break;
+        case "rating":
+          questions = [...questions, new FormTextBoxObj("rating")];
+          break;
+        case "multiple-choice":
+          questions = [
+            ...questions,
+            {
+              ...new FormTextBoxObj("multiple-choice"),
+              options: [
+                {
+                  option: "",
+                },
+              ],
+            },
+          ];
+          break;
       }
       this.survey.questions = questions;
     },
     handleDeleteQuestion(id) {
       this.survey.questions = this.survey.questions.filter((_, i) => i !== id);
+    },
+    handleAddOption(id) {
+      let questions = [...this.survey.questions];
+      let currentQuestionOptions = questions[id].options;
+      if (currentQuestionOptions.length >= 4) {
+        return;
+      }
+      currentQuestionOptions = [
+        ...currentQuestionOptions,
+        {
+          option: "",
+        },
+      ];
+      this.survey.questions[id].options = currentQuestionOptions;
+    },
+    handleDeleteOption(questionId, optionId) {
+      let questions = [...this.survey.questions];
+      let currentQuestionOptions = questions[questionId].options;
+      this.survey.questions[questionId].options = currentQuestionOptions.filter(
+        (_, i) => i !== optionId
+      );
     },
     createSurvey() {
       const surveyData = {
@@ -118,6 +195,7 @@ export default {
         isPublished: this.survey.isPublished,
         questions: this.survey.questions,
       };
+      console.log("surveyData??", surveyData);
       SurveyService.createSurvey(surveyData)
         .then((response) => {
           if (response.status === 200) {
