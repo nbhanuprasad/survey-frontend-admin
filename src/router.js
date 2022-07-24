@@ -36,6 +36,12 @@ const routes =  [
     name: "changePassword",
     component: () => import("./views/Admin/ChangePassword.vue"),
   },
+  {
+    path: "/view-survey/:id",
+    name: "viewSurvey",
+    component: () => import("./views/Survey/ViewSurvey.vue"),
+    props:true
+  },
 ];
 const router = createRouter({
   base: process.env.NODE_ENV === 'development' ? '/' : '/survey-frontend-admin/',

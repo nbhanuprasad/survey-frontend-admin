@@ -53,8 +53,7 @@ export default {
     fetchSurvey() {
       SurveyService.getSurvey(this.id)
         .then((response) => {
-          this.title = response.title;
-          this.description = response.description;
+          this.formData = response.data;
         })
         .catch((e) => {
           this.message = e.response.data.message;
