@@ -30,7 +30,7 @@
                 large
                 color="red"
                 class="actions__icon"
-                @click="onDeleteSurvey(item.id)"
+                @click="onDeleteSurvey(survey.id)"
               >
                 mdi-delete-outline
               </v-icon>
@@ -60,7 +60,7 @@ export default {
     onDeleteSurvey(id) {
       SurveyService.deleteSurvey(id)
         .then(() => {
-          console.log("deletea??");
+          this.fetchSurveys();
         })
         .catch((e) => {
           this.message = e.response.data.message;
