@@ -16,6 +16,12 @@ const routes =  [
     component: () => import("./views/Survey/CreateSurvey.vue"),
   },
   {
+    path: "/edit-survey/:id",
+    name: "editSurvey",
+    component: () => import("./views/Survey/EditSurvey.vue"),
+    props:true
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("./views/Auth/Login.vue"),

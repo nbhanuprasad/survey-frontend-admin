@@ -1,6 +1,6 @@
 <template>
   <div class="register container">
-    <v-form class="form survey__form">
+    <v-form class="form survey__form" @submit="createSurvey">
       <h2 class="heading">CREATE SURVEY</h2>
       <v-text-field
         v-model="survey.title"
@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-      <button @click="createSurvey" class="button__black">Create Survey</button>
+      <button class="button__black">Create Survey</button>
     </v-form>
   </div>
 </template>
@@ -188,14 +188,15 @@ export default {
         (_, i) => i !== optionId
       );
     },
-    createSurvey() {
+    createSurvey(e) {
+      e.preventDefault();
       const surveyData = {
         title: this.survey.title,
         description: this.survey.description,
         isPublished: this.survey.isPublished,
         questions: this.survey.questions,
       };
-      console.log("surveyData??", surveyData);
+      // console.log("surveyData??", surveyData);
       SurveyService.createSurvey(surveyData)
         .then((response) => {
           if (response.status === 200) {

@@ -22,5 +22,19 @@ class SurveyService {
       }
     });
   }
+  updateSurvey(id, surveyData) {
+    return http.put(`/survey/${id}`, surveyData, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
+  getSurvey(id) {
+    return http.get(`/survey/${id}`, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
 }
 export default new SurveyService();

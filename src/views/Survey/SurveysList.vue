@@ -7,14 +7,17 @@
         }}
       </caption>
       <thead>
-        <tr>
+        <tr v-show="surveys.length > 0">
           <th scope="col">Title</th>
           <th scope="col">Description</th>
           <th scope="col">Status</th>
           <th scope="col">Actions</th>
         </tr>
+        <tr v-show="surveys.length <= 0">
+          <th scope="col" class="error__msg">NO SURVEYS FOUND</th>
+        </tr>
       </thead>
-      <tbody v-for="survey in surveys">
+      <tbody v-for="survey in surveys" v-show="surveys.length > 0">
         <tr>
           <td data-label="Survey Title">{{ survey.title }}</td>
           <td data-label="Survey Description">{{ survey.description }}</td>
@@ -25,6 +28,15 @@
             <span class="table__item--actions">
               <v-icon large color="blue" class="actions__icon">
                 mdi-eye-outline
+              </v-icon>
+              <v-icon
+                large
+                color="orange"
+                class="actions__icon"
+                @click="onEditSurvey(survey.id)"
+                v-if="userType === 'admin'"
+              >
+                mdi-pencil
               </v-icon>
               <v-icon
                 large
@@ -53,10 +65,14 @@ export default {
           isPublished: false,
         },
       ],
+      userType: "",
       message: "Surveys List",
     };
   },
   methods: {
+    onEditSurvey(surveyId) {
+      this.$router.push({ name: "editSurvey", params: { id: surveyId } });
+    },
     onDeleteSurvey(id) {
       SurveyService.deleteSurvey(id)
         .then(() => {
@@ -78,6 +94,7 @@ export default {
   },
   mounted() {
     this.fetchSurveys();
+    this.userType = sessionStorage.getItem("userType");
   },
 };
 </script>
