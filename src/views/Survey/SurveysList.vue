@@ -21,8 +21,14 @@
         <tr>
           <td data-label="Survey Title">{{ survey.title }}</td>
           <td data-label="Survey Description">{{ survey.description }}</td>
-          <td data-label="Status">
-            {{ survey.isPublished ? "Published" : "UnPublished" }}
+          <td data-label="Status" class="published__switch">
+            <v-switch
+              :label="`${survey.isPublished ? 'Published' : 'UnPublished'}`"
+              v-model="survey.isPublished"
+              @change="onPublishSurvey(survey)"
+              color="indigo"
+              inset
+            ></v-switch>
           </td>
           <td data-label="Actions">
             <span class="table__item--actions">
@@ -63,6 +69,7 @@ export default {
           title: "space",
           description: "study on space",
           isPublished: false,
+          id: 2,
         },
       ],
       userType: "",
@@ -77,6 +84,21 @@ export default {
       SurveyService.deleteSurvey(id)
         .then(() => {
           this.fetchSurveys();
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    onPublishSurvey(survey) {
+      const surveyData = {
+        id: survey.id,
+        isPublished: survey.isPublished,
+      };
+      SurveyService.publishSurvey(surveyData)
+        .then((response) => {
+          if (response.status === 200) {
+            this.fetchSurveys();
+          }
         })
         .catch((e) => {
           this.message = e.response.data.message;
@@ -98,3 +120,18 @@ export default {
   },
 };
 </script>
+<style>
+.published__switch .v-input__details {
+  display: none !important;
+}
+.published__switch .v-input {
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 20px !important;
+  margin-top: 0px !important;
+}
+.published__switch .v-input--density-default {
+  --v-input-control-height: 25px !important;
+}
+</style>
