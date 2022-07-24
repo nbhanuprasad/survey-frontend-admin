@@ -53,7 +53,7 @@ export default {
       AdminService.changePassword(data) 
         .then((response) => {
           if (response.status === 200) {
-            this.$router.push({ name: "adminsList" });
+            this.$router.push({ name: "surveysList" });
           }
         })
         .catch((e) => {
