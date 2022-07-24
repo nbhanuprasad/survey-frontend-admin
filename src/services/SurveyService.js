@@ -36,5 +36,12 @@ class SurveyService {
       }
     });
   }
+  publishSurvey(surveyData) {
+    return http.put(`/survey/${surveyData.id}?isPublished=${surveyData.isPublished}`, {}, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
 }
 export default new SurveyService();
