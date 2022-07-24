@@ -1,11 +1,11 @@
-import http from "../http-common"; 
+import http from "../http-common";
 
 class AuthService {
   login(authData) {
     return http.post(`/auth/signin`, authData);
   }
-  logout(userId) {
-    return http.put(`/auth/logout/${userId}`,{
+  logout() {
+    return http.put(`/auth/logout`, {}, {
       headers: {
         'x-access-token': sessionStorage.getItem("authToken")
       }
