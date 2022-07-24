@@ -45,7 +45,6 @@
               <h3>
                 Question Type - {{ question.question_type.toUpperCase() }}
               </h3>
-              <h4>Question No - {{ index + 1 }}</h4>
             </div>
             <v-text-field
               v-model="question.title"
@@ -56,7 +55,7 @@
             <!-- MULTIPLE CHOICE QUESTION-->
             <div v-if="question.question_type === 'multiple-choice'">
               <h5>
-                ADD OPTION (max 4*)
+                ADD OPTION
                 <v-icon
                   large
                   color="blue"
@@ -170,9 +169,6 @@ export default {
     handleAddOption(id) {
       let questions = [...this.survey.questions];
       let currentQuestionOptions = questions[id].options;
-      if (currentQuestionOptions.length >= 4) {
-        return;
-      }
       currentQuestionOptions = [
         ...currentQuestionOptions,
         {

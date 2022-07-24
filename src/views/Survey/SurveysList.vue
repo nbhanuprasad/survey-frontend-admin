@@ -6,6 +6,7 @@
           message
         }}
       </caption>
+      <h3 v-show="surveys.length <= 0" class="error__msg">NO SURVEYS FOUND</h3>
       <thead>
         <tr v-show="surveys.length > 0">
           <th scope="col">Title</th>
@@ -13,11 +14,12 @@
           <th scope="col">Status</th>
           <th scope="col">Actions</th>
         </tr>
-        <tr v-show="surveys.length <= 0">
-          <th scope="col" class="error__msg">NO SURVEYS FOUND</th>
-        </tr>
       </thead>
-      <tbody v-for="survey in surveys" v-show="surveys.length > 0">
+      <tbody
+        v-for="(survey, i) in surveys"
+        :key="i"
+        v-show="surveys.length > 0"
+      >
         <tr>
           <td data-label="Survey Title">{{ survey.title }}</td>
           <td data-label="Survey Description">{{ survey.description }}</td>
@@ -32,7 +34,12 @@
           </td>
           <td data-label="Actions">
             <span class="table__item--actions">
-              <v-icon large color="blue" class="actions__icon">
+              <v-icon
+                large
+                color="blue"
+                class="actions__icon"
+                @click="onViewSurvey(survey.id)"
+              >
                 mdi-eye-outline
               </v-icon>
               <v-icon
@@ -79,6 +86,9 @@ export default {
   methods: {
     onEditSurvey(surveyId) {
       this.$router.push({ name: "editSurvey", params: { id: surveyId } });
+    },
+    onViewSurvey(surveyId) {
+      this.$router.push({ name: "viewSurvey", params: { id: surveyId } });
     },
     onDeleteSurvey(id) {
       SurveyService.deleteSurvey(id)
