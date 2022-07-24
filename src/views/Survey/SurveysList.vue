@@ -1,11 +1,22 @@
 <template>
-  <div class="container">
+  <div class="container viewSurvey">
+    <h3 class="heading">
+      {{ message }}
+    </h3>
+    <div class="align_single_line"  v-if="userType !== 'admin'">
+      <h3>
+        <strong>User Name</strong> : <span>{{ userInfo.username }}</span>
+      </h3>
+      <h3>
+        <strong>User Email</strong> :
+        <span>{{ userInfo.email }}</span>
+      </h3>
+      <h3>
+        <strong>User Status</strong> :
+        <span>{{ userInfo.active ? "Active" : "InActive" }}</span>
+      </h3>
+    </div>
     <table>
-      <caption class="heading">
-        {{
-          message
-        }}
-      </caption>
       <h3 v-show="surveys.length <= 0" class="error__msg">NO SURVEYS FOUND</h3>
       <thead>
         <tr v-show="surveys.length > 0">
@@ -25,12 +36,13 @@
           <td data-label="Survey Description">{{ survey.description }}</td>
           <td data-label="Status" class="published__switch">
             <v-switch
-              :label="`${survey.isPublished ? 'Published' : 'UnPublished'}`"
               v-model="survey.isPublished"
               @change="onPublishSurvey(survey)"
               color="indigo"
               inset
+              v-if="userType === 'admin'"
             ></v-switch>
+            {{ survey.isPublished ? "Published" : "UnPublished" }}
           </td>
           <td data-label="Actions">
             <span class="table__item--actions">
@@ -69,6 +81,7 @@
 <script>
 import SurveyService from "../../services/SurveyService";
 export default {
+  props: ["path", "id"],
   data() {
     return {
       surveys: [
@@ -80,6 +93,7 @@ export default {
         },
       ],
       userType: "",
+      userInfo: {},
       message: "Surveys List",
     };
   },
@@ -115,17 +129,31 @@ export default {
         });
     },
     fetchSurveys() {
-      SurveyService.getAllSurveys()
-        .then((response) => {
-          this.surveys = response.data;
-        })
-        .catch((e) => {
-          this.message = e.response.data.message;
-        });
+      console.log(this.path);
+      if (this.path === "adminSurveys") {
+        SurveyService.getAdminSurveys(this.id)
+          .then((response) => {
+            this.surveys = response.data.survey;
+            this.userInfo = response.data;
+            this.message = `${response.data.username} SURVEYS LIST`;
+          })
+          .catch((e) => {
+            this.message = e.response.data.message;
+          });
+      } else {
+        SurveyService.getAllSurveys()
+          .then((response) => {
+            this.surveys = response.data;
+          })
+          .catch((e) => {
+            this.message = e.response.data.message;
+          });
+      }
     },
   },
   mounted() {
     this.fetchSurveys();
+    console.log(this.$route);
     this.userType = sessionStorage.getItem("userType");
   },
 };

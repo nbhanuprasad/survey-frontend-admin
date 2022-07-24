@@ -19,12 +19,17 @@
           <td data-label="Email">{{ admin.email }}</td>
           <td data-label="Actions">
             <span class="table__item--actions">
-              <v-icon large color="blue" class="actions__icon">
+              <v-icon
+                large
+                color="blue"
+                class="actions__icon"
+                @click="onViewAdmin(admin.id)"
+              >
                 mdi-eye-outline
               </v-icon>
-              <v-icon large color="red" class="actions__icon">
+              <!-- <v-icon large color="red" class="actions__icon">
                 mdi-delete-outline
-              </v-icon>
+              </v-icon> -->
             </span>
           </td>
         </tr>
@@ -42,8 +47,11 @@ export default {
     };
   },
   methods: {
-    goView(album) {
-      this.$router.push({ name: "view", params: { id: album.id } });
+    onViewAdmin(adminId) {
+      this.$router.push({
+        name: "viewAdmin",
+        params: { path: "adminSurveys", id: adminId },
+      });
     },
     goDelete(album) {
       AdminService.delete(album.id)

@@ -8,6 +8,13 @@ class SurveyService {
       }
     });
   }
+  getAdminSurveys(adminId) {
+    return http.get(`/superadmin/${adminId}`, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
   createSurvey(surveyData) {
     return http.post("/createsurvey", surveyData, {
       headers: {

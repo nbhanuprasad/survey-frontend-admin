@@ -11,6 +11,12 @@ const routes =  [
     component: () => import("./views/Survey/SurveysList.vue")
   },
   {
+    path: "/view-admin/:path/:id",
+    name: "viewAdmin",
+    component: () => import("./views/Survey/SurveysList.vue"),
+    props:true
+  },
+  {
     path: "/create-survey",
     name: "createSurvey",
     component: () => import("./views/Survey/CreateSurvey.vue"),
