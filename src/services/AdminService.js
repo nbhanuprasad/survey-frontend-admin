@@ -16,7 +16,7 @@ class AdminService {
     });
   }
   changePassword(data) {
-    return http.post(`/auth/changepassword`, data, {
+    return http.put(`/auth/changepassword`, data, {
       headers: {
         'x-access-token': sessionStorage.getItem("authToken")
       }
