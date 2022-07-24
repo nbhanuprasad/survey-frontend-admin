@@ -25,6 +25,11 @@ const routes =  [
     name: "createAdmin",
     component: () => import("./views/Admin/CreateAdmin.vue"),
   },
+  {
+    path: "/change-password",
+    name: "changePassword",
+    component: () => import("./views/Admin/ChangePassword.vue"),
+  },
 ];
 const router = createRouter({
   base: process.env.NODE_ENV === 'development' ? '/' : '/survey-frontend-admin/',

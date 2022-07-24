@@ -15,5 +15,12 @@ class AdminService {
       }
     });
   }
+  changePassword(data) {
+    return http.post(`/auth/changepassword`, data, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
 }
 export default new AdminService();
