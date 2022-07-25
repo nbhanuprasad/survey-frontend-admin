@@ -76,5 +76,8 @@ export default {
   text-align: center;
   padding: 5px 0;
   margin: 10px 0;
+  background: var(--white);
+  padding: 5px 0;
+  border-radius: 10px;
 }
 </style>
