@@ -1,10 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <Navbar 
-      v-if="currentPath !== '/login'"
-      :role="userType"
-      />
+      <Navbar v-if="currentPath !== '/login'" :role="userType" />
       <router-view />
     </v-main>
   </v-app>
@@ -13,6 +10,7 @@
 import Navbar from "./components/Navbar/Navbar.vue";
 import "./styles/index.css";
 import "./styles/ResponsiveTable.css";
+import SurveyService from "./services/SurveyService";
 export default {
   name: "App",
   components: {
@@ -22,6 +20,26 @@ export default {
     currentPath: "",
     userType: "",
   }),
+  methods: {
+    validateUser() {
+      console.log("validating in every route");
+      SurveyService.getAllSurveys()
+        .then()
+        .catch((e) => {
+          console.log(e.response);
+          if (e.response.status === 401) {
+            alert(
+              "OOPS! Your  Account has been deactivated please contact your adminstrator."
+            );
+            sessionStorage.removeItem("authToken");
+            sessionStorage.removeItem("userId");
+            sessionStorage.removeItem("userType");
+            this.$router.push({ name: "login" });
+          }
+          this.message = e.response.data.message;
+        });
+    },
+  },
   created() {
     const authToken = sessionStorage.getItem("authToken");
     const userType = sessionStorage.getItem("userType");
@@ -37,6 +55,9 @@ export default {
       () => {
         this.currentPath = this.$route.path;
         this.userType = sessionStorage.getItem("userType");
+        if (this.$route.path !== "/login") {
+          this.validateUser();
+        }
       }
     );
   },
@@ -71,7 +92,7 @@ export default {
   padding: 8px 10px;
   font-size: 16px;
 }
-.error__msg{
+.error__msg {
   color: var(--red);
   text-align: center;
   padding: 5px 0;
