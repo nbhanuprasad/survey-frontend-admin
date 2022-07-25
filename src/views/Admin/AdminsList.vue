@@ -63,7 +63,7 @@ export default {
     onViewAdmin(adminId) {
       this.$router.push({
         name: "viewAdmin",
-        params: { path: "adminadmins", id: adminId },
+        params: { path: "adminSurveys", id: adminId },
       });
     },
     goDelete(album) {
