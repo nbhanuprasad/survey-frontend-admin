@@ -158,18 +158,3 @@ export default {
   },
 };
 </script>
-<style>
-.published__switch .v-input__details {
-  display: none !important;
-}
-.published__switch .v-input {
-  display: inline-block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  height: 20px !important;
-  margin-top: 0px !important;
-}
-.published__switch .v-input--density-default {
-  --v-input-control-height: 25px !important;
-}
-</style>
