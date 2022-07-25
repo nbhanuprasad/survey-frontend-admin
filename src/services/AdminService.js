@@ -22,5 +22,12 @@ class AdminService {
       }
     });
   }
+  updateAdminStatus(adminData) {
+    return http.put(`/superadmin/${adminData.id}?active=${adminData.isActive}`, {}, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
 }
 export default new AdminService();
