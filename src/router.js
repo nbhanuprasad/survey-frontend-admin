@@ -11,9 +11,21 @@ const routes =  [
     component: () => import("./views/Survey/SurveysList.vue")
   },
   {
+    path: "/view-admin/:path/:id",
+    name: "viewAdmin",
+    component: () => import("./views/Survey/SurveysList.vue"),
+    props:true
+  },
+  {
     path: "/create-survey",
     name: "createSurvey",
     component: () => import("./views/Survey/CreateSurvey.vue"),
+  },
+  {
+    path: "/edit-survey/:id",
+    name: "editSurvey",
+    component: () => import("./views/Survey/EditSurvey.vue"),
+    props:true
   },
   {
     path: "/login",
@@ -24,6 +36,17 @@ const routes =  [
     path: "/create-admin",
     name: "createAdmin",
     component: () => import("./views/Admin/CreateAdmin.vue"),
+  },
+  {
+    path: "/change-password",
+    name: "changePassword",
+    component: () => import("./views/Admin/ChangePassword.vue"),
+  },
+  {
+    path: "/view-survey/:id",
+    name: "viewSurvey",
+    component: () => import("./views/Survey/ViewSurvey.vue"),
+    props:true
   },
 ];
 const router = createRouter({

@@ -23,6 +23,9 @@
       <router-link class="navbar__right--link" to="/create-survey"
         >Create Survey</router-link
       >
+         <router-link class="navbar__right--link" to="/change-password"
+        >Change Password</router-link
+      >
       <button class="button__black logout__button" @click="onLogout">
         Logout
       </button>
