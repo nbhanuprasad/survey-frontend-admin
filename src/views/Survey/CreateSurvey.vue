@@ -126,7 +126,7 @@ export default {
         questions: [],
         isPublished: false,
         questionType: "",
-        questionOptions: ["text-box", "multiple-choice", "rating", "paragraph"],
+        questionOptions: ["text-box", "multiple-choice", "rating"],
       },
       message: "Create Survey , Add Questions",
       rules: {
@@ -140,9 +140,6 @@ export default {
       switch (this.survey.questionType) {
         case "text-box":
           questions = [...questions, new FormTextBoxObj("text-box")];
-          break;
-        case "paragraph":
-          questions = [...questions, new FormTextBoxObj("paragraph")];
           break;
         case "rating":
           questions = [...questions, new FormTextBoxObj("rating")];
