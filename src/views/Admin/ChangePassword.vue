@@ -20,7 +20,7 @@
         :rules="[rules.required]"
         type="text"
       ></v-text-field>
-      <button class="button__black">Change Password</button>
+      <button class="button__black">Create Admin</button>
     </v-form>
   </div>
 </template>
