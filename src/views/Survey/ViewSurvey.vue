@@ -22,7 +22,7 @@
       </div>
     </div>
     <h3 v-show="survey.question.length <= 0" class="error__msg">
-      NO SURVEYS FOUND
+      NO QUESTIONS FOUND
     </h3>
     <div class="form" v-show="survey.question && survey.question.length > 0">
       <vue-collapsible-panel-group
@@ -40,7 +40,19 @@
                   item.choice
                 }}</span>
               </div>
-              <h3>Survey Question Response</h3>
+              <section v-if="question.response && question.response.length > 0">
+                <h3>Question Responses</h3>
+                <div v-for="item in question.response" :key="item.id">
+                  <span class="viewSurvey__choice response">{{
+                    `${item.enduser.email} - SUBMITTED - ${item.response}`
+                  }}</span>
+                </div>
+              </section>
+              <span
+                v-if="question.response && question.response.length <= 0"
+                class="viewSurvey__choice response login_error"
+                >NO RESPONSES FOUND FOR THIS QUESTION</span
+              >
             </div>
           </template>
         </vue-collapsible-panel>
@@ -79,4 +91,26 @@ export default {
 };
 </script>
 <style>
+.viewSurvey__choice {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #d3d3d3;
+}
+
+.response {
+  width: 100%;
+  margin: 5px 0;
+  display: inline-block;
+}
+.login_error {
+  padding: 1px 20px;
+  text-align: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  background: #d3d3d3;
+  margin: 10px 0;
+  border-radius: 10px;
+  color: var(--redColor);
+  transition: all 0.4s ease-in-out;
+}
 </style>
