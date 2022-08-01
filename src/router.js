@@ -22,9 +22,9 @@ const routes =  [
     component: () => import("./views/Survey/CreateSurvey.vue"),
   },
   {
-    path: "/edit-survey/:id",
+    path: "/edit-survey/:surveyId",
     name: "editSurvey",
-    component: () => import("./views/Survey/EditSurvey.vue"),
+    component: () => import("./views/Survey/CreateSurvey.vue"),
     props:true
   },
   {
