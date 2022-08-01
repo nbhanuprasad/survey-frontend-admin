@@ -50,5 +50,12 @@ class SurveyService {
       }
     });
   }
+  shareLink(userData) {
+    return http.post(`/sendemail`, userData, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
 }
 export default new SurveyService();
