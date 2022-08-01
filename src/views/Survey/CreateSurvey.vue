@@ -1,7 +1,7 @@
 <template>
   <div class="register container">
     <v-form class="form survey__form" @submit="createSurvey">
-      <h2 class="heading">CREATE SURVEY</h2>
+      <h2 class="heading">{{ surveyId ? "UPDATE" : "CREATE" }} SURVEY</h2>
       <v-text-field
         v-model="survey.title"
         label="Survey Title"
@@ -71,7 +71,15 @@
               >
                 <div class="survey__question--option">
                   <v-text-field
+                    v-if="!surveyId"
                     v-model="item.option"
+                    :label="`Option ${optionIndex + 1}`"
+                    :rules="[rules.required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-else-if="surveyId"
+                    v-model="item.choice"
                     :label="`Option ${optionIndex + 1}`"
                     :rules="[rules.required]"
                   >
@@ -109,7 +117,9 @@
           </div>
         </div>
       </div>
-      <button class="button__black">Create Survey</button>
+      <button class="button__black">
+        {{ surveyId ? "Update" : "Create" }} Survey
+      </button>
     </v-form>
   </div>
 </template>
@@ -118,6 +128,7 @@ import SurveyService from "../../services/SurveyService";
 import { FormTextBoxObj } from "./SurveyHelper";
 export default {
   name: "create-survey",
+  props: ["surveyId"],
   data() {
     return {
       survey: {
@@ -189,17 +200,69 @@ export default {
         isPublished: this.survey.isPublished,
         questions: this.survey.questions,
       };
-      // console.log("surveyData??", surveyData);
-      SurveyService.createSurvey(surveyData)
-        .then((response) => {
-          if (response.status === 200) {
+      if (this.surveyId) {
+        const updatedQuestions = this.survey.questions.map((ques) => {
+          const newQuest = ques;
+          delete newQuest.choice;
+          delete newQuest.questionType;
+          return newQuest;
+        });
+        surveyData.questions = updatedQuestions;
+        SurveyService.updateSurvey(this.surveyId, surveyData)
+          .then((response) => {
             this.$router.push({ name: "surveysList" });
-          }
+          })
+          .catch((e) => {
+            this.message = e.response.data.message;
+          });
+      } else {
+        SurveyService.createSurvey(surveyData)
+          .then((response) => {
+            if (response.status === 200) {
+              this.$router.push({ name: "surveysList" });
+            }
+          })
+          .catch((e) => {
+            this.message = e.response.data.message;
+          });
+      }
+    },
+    getSurveyDetails() {
+      SurveyService.getSurvey(this.surveyId)
+        .then((response) => {
+          const apiRes = response.data;
+          this.survey.title = apiRes.title;
+          this.survey.description = apiRes.description;
+          this.survey.isPublished = apiRes.isPublished;
+          const formQuestions = apiRes.question.map((ques) => {
+            return {
+              ...ques,
+              options: ques.choice,
+              question_type: ques.questionType,
+            };
+          });
+          this.survey.questions = formQuestions;
+          this.survey.questionType = "text-box";
         })
         .catch((e) => {
           this.message = e.response.data.message;
         });
     },
+  },
+  mounted() {
+    if (this.surveyId) {
+      this.getSurveyDetails();
+    }
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.survey.title = "";
+        this.survey.description = "";
+        this.survey.isPublished = false;
+        this.survey.questions = [];
+        this.survey.questionType = "";
+      }
+    );
   },
 };
 </script>

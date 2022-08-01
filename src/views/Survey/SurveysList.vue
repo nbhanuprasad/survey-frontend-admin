@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     onEditSurvey(surveyId) {
-      this.$router.push({ name: "editSurvey", params: { id: surveyId } });
+      this.$router.push({ name: "editSurvey", params: { surveyId } });
     },
     onViewSurvey(surveyId) {
       this.$router.push({ name: "viewSurvey", params: { id: surveyId } });
