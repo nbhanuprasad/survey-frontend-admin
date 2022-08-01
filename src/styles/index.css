@@ -206,6 +206,59 @@ body {
     --v-input-control-height: 25px !important;
 }
 
+/* MODAL */
+.overlay {
+    height: 100vh;
+    width: 100%;
+    background: rgba(215, 201, 201, 0.158);
+    position: absolute;
+    inset: 0;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    display: grid;
+    place-items: center;
+}
+
+.modal {
+    width: 50%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #d3d3d3;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.136);
+}
+
+.modal .v-input {
+    margin-left: 0 !important;
+    margin-bottom: 50px !important;
+}
+
+.modal .v-input__details {
+    display: inline-block !important;
+}
+
+.dialog__close--icon {
+    position: absolute !important;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+}
+
+.dialog__input {
+    margin-left: auto !important;
+    width: auto !important;
+}
+
+.share__btn {
+    margin-top: 60px;
+}
+
 @media (max-width: 900px) {
     .login {
         grid-template-columns: 1fr;
@@ -225,5 +278,16 @@ body {
 
     .heading {
         font-size: 30px;
+    }
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        right: 0;
+        left: 0;
+        z-index: 1000;
+    }
+    .modal {
+        width: 100%;
     }
 }

@@ -3,7 +3,7 @@
     <h3 class="heading">
       {{ message }}
     </h3>
-    <div class="align_single_line"  v-if="userType !== 'admin'">
+    <div class="align_single_line" v-if="userType !== 'admin'">
       <h3>
         <strong>User Name</strong> : <span>{{ userInfo.username }}</span>
       </h3>
@@ -42,6 +42,28 @@
               inset
               v-if="userType === 'admin'"
             ></v-switch>
+            <div class="overlay" v-if="isPopupOpened === true">
+              <v-form class="modal">
+                <h3>ENTER PARTICIPANT EMAIL ID</h3>
+                <v-text-field
+                  v-model="participantEmail"
+                  label="Enter participant email id"
+                  :rules="[rules.required, rules.email]"
+                  class="dialog__input"
+                ></v-text-field>
+                <v-icon
+                  large
+                  color="error darken-2"
+                  class="icon dialog__close--icon"
+                  @click="closePopup"
+                >
+                  mdi-close
+                </v-icon>
+                <button @click="shareLink(survey.id)" class="button__black">
+                  SEND SURVEY LINK
+                </button>
+              </v-form>
+            </div>
             {{ survey.isPublished ? "Published" : "UnPublished" }}
           </td>
           <td data-label="Actions">
@@ -71,6 +93,15 @@
               >
                 mdi-delete-outline
               </v-icon>
+              <v-icon
+                large
+                color="green darken-2"
+                class="icon"
+                v-show="survey.isPublished"
+                @click="openPopup"
+              >
+                mdi-share
+              </v-icon>
             </span>
           </td>
         </tr>
@@ -95,6 +126,16 @@ export default {
       userType: "",
       userInfo: {},
       message: "Surveys List",
+      participantEmail: "",
+      isPopupOpened: false,
+      rules: {
+        required: (value) => !!value || `Field Required !`,
+        email: (value) => {
+          const pattern =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
+        },
+      },
     };
   },
   methods: {
@@ -122,6 +163,30 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.fetchSurveys();
+          }
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    openPopup() {
+      this.isPopupOpened = true;
+      console.log(this.isPopupOpened);
+    },
+    closePopup() {
+      this.isPopupOpened = false;
+    },
+    shareLink(surveyId) {
+      const linkData = {
+        surveyLink: `http://3.15.209.180/survey-frontend-survey/survey/${surveyId}/`,
+        endsuserEmail: this.participantEmail,
+      };
+      SurveyService.shareLink(linkData)
+        .then((response) => {
+          if (response.status === 200) {
+            this.$router.push({ name: "surveysList" });
+            this.participantEmail = "";
+            this.isPopupOpened = false;
           }
         })
         .catch((e) => {
