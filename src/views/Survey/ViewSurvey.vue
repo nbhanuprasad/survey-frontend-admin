@@ -20,6 +20,7 @@
           <span>{{ new Date(survey.createdAt).toLocaleString() }}</span>
         </h3>
       </div>
+      <ExportReport :fileData="fileData" :fileName="fileName" />
     </div>
     <h3 v-show="survey.question.length <= 0" class="error__msg">
       NO QUESTIONS FOUND
@@ -62,14 +63,20 @@
 </template>
 <script>
 import SurveyService from "../../services/SurveyService";
+import ExportReport from "./ExportReport.vue";
 export default {
   name: "view-survey",
+  components: {
+    ExportReport,
+  },
   props: ["id"],
   data() {
     return {
       survey: {
         question: [],
       },
+      fileData: [],
+      fileName: "",
       message: "",
     };
   },
@@ -78,7 +85,16 @@ export default {
       SurveyService.getSurvey(this.id)
         .then((response) => {
           this.survey = response.data;
-          console.log(this.survey);
+        })
+        .catch((e) => {
+          this.message = e.response.data.message;
+        });
+    },
+    fetchReportData() {
+      SurveyService.getReportDetails(this.id)
+        .then((response) => {
+          this.fileData = response.data;
+          this.fileName = this.survey.title;
         })
         .catch((e) => {
           this.message = e.response.data.message;
@@ -87,6 +103,7 @@ export default {
   },
   mounted() {
     this.retrieveSurvey();
+    this.fetchReportData();
   },
 };
 </script>

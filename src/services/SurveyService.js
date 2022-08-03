@@ -57,5 +57,12 @@ class SurveyService {
       }
     });
   }
+  getReportDetails(surveyId) {
+    return http.get(`/download?surveyId=${surveyId}`, {
+      headers: {
+        'x-access-token': sessionStorage.getItem("authToken")
+      }
+    });
+  }
 }
 export default new SurveyService();

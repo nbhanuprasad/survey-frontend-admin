@@ -178,7 +178,9 @@ export default {
     },
     shareLink(surveyId) {
       const linkData = {
-        surveyLink: `http://3.15.209.180/survey-frontend-survey/survey/${surveyId}/`,
+        surveyLink: `http://3.15.209.180/survey-frontend-survey/survey/${surveyId}/${window.btoa(
+          this.participantEmail
+        )}`,
         endsuserEmail: this.participantEmail,
       };
       SurveyService.shareLink(linkData)
