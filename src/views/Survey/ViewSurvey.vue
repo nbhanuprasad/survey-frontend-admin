@@ -45,7 +45,7 @@
               </div>
               <div
                 class="options"
-                v-show="question.questionType === 'rating_type_question'"
+                v-show="question.questionType === 'rating'"
               >
                 <span v-for="(item, i) in question?.userRatings" :key="i">
                   {{ `RATING ${item.key} -  COUNT ${item.count}` }}</span
@@ -56,7 +56,7 @@
                   question.response &&
                   question.response.length > 0 &&
                   question.questionType !== 'multiple-choice' &&
-                  question.questionType !== 'rating_type_question'
+                  question.questionType !== 'rating'
                 "
               >
                 <h3>Question Responses</h3>
