@@ -39,14 +39,13 @@
               <div class="options" v-show="question.choice.length > 0">
                 <span v-for="(item, i) in question.choice" :key="i">
                   {{
-                    `${item.count} members have selected this option : ${item.choice}`
+                    `${
+                      item.count ? item.count : 0
+                    } members have selected this option : ${item.choice}`
                   }}</span
                 >
               </div>
-              <div
-                class="options"
-                v-show="question.questionType === 'rating'"
-              >
+              <div class="options" v-show="question.questionType === 'rating'">
                 <span v-for="(item, i) in question?.userRatings" :key="i">
                   {{ `RATING ${item.key} -  COUNT ${item.count}` }}</span
                 >
