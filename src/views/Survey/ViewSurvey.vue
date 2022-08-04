@@ -37,11 +37,28 @@
           <template #content>
             <div>
               <div class="options" v-show="question.choice.length > 0">
-                <span v-for="(item, i) in question.choice" :key="i">{{
-                  item.choice
-                }}</span>
+                <span v-for="(item, i) in question.choice" :key="i">
+                  {{
+                    `${item.count} members have selected this option : ${item.choice}`
+                  }}</span
+                >
               </div>
-              <section v-if="question.response && question.response.length > 0">
+              <div
+                class="options"
+                v-show="question.questionType === 'rating_type_question'"
+              >
+                <span v-for="(item, i) in question?.userRatings" :key="i">
+                  {{ `RATING ${item.key} -  COUNT ${item.count}` }}</span
+                >
+              </div>
+              <section
+                v-if="
+                  question.response &&
+                  question.response.length > 0 &&
+                  question.questionType !== 'multiple-choice' &&
+                  question.questionType !== 'rating_type_question'
+                "
+              >
                 <h3>Question Responses</h3>
                 <div v-for="item in question.response" :key="item.id">
                   <span class="viewSurvey__choice response">{{
